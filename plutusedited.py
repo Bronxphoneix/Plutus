@@ -7,10 +7,9 @@ import os
 import pickle
 import multiprocessing
 import bitcoin as btc
-import random
 
 DATABASE = r'database/MAR_23_2019/'
-gpkey = lambda: random.randrange(2**256)
+gpkey = lambda: btc.random_key()
 addal = lambda pkey: btc.pubkey_to_address(btc.privkey_to_pubkey(pkey))
 caddal = lambda pkey: btc.pubkey_to_address(btc.compress(btc.privkey_to_pubkey(pkey))) 
 
@@ -19,7 +18,7 @@ def process(pkey, address, caddress, database):
 	   address in database[1] or \
 	   address in database[2] or \
 	   address in database[3] or \
-       caddress in database[0] or \
+	   caddress in database[1] or \
 	   caddress in database[1] or \
 	   caddress in database[2] or \
 	   caddress in database[3]:
